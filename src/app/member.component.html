@@ -1,0 +1,17 @@
+<section id="member">
+    <h1>Members</h1>
+    <div *ngIf="state == 'need_member'">
+        <span class="entry">Phone #: <input id="member-phone" type="tel" [(ngModel)]="phone"></span>
+        <button id="member_checkin" (click)="checkin()">Check in</button>
+        <div class="error">{{error_message}}</div>
+    </div>
+    <div *ngIf="state == 'have_member'">
+        <div class="welcome">Welcome, {{member.full_name}}!</div>
+        <div class="change_member">Not {{member.full_name}}? <button id="change_member" (click)="change_member()">Change member</button></div>
+        <div>Who is with you?</div>
+        <div>
+            <div *ngFor="let m of member.family.members"><input type="checkbox" data-id="{{m.id}}" [(ngModel)]="member_here[m.id]">{{m.full_name}}</div>
+        </div>
+        <button id="check_in" (click)="finish_checkin()">Check in</button>
+    </div>
+</section>

@@ -1,0 +1,25 @@
+.options {
+    text-align: center;
+    border-bottom: black;
+    border-width: 1px;
+    border-bottom-style: solid;
+    padding-bottom: 0.5em;
+}
+.option { pad-left: 1em; }
+.go { float: right; }
+.go button { padding-top: 0; }
+
+table { width: 100%; }
+td:not(:last-child) {
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: #777;
+}
+td:not(:first-child) {
+    padding-left: 0.5em;
+}
+td.number {
+    padding-right: 0.5em;
+}
+.number { text-align: right; }
+.num_children { text-align: right; }
