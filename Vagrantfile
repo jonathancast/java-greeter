@@ -8,7 +8,7 @@ PRIVATE_NETWORK = "10.45.45"
 
 Vagrant.configure("2") do |config|
     config.vm.define "db" do |db|
-        db.vm.box = "debian/contrib-jessie64"
+        db.vm.box = "debian/jessie64"
 
         db.vm.network "private_network", ip: "#{PRIVATE_NETWORK}.4"
 
@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "web" do |web|
-        web.vm.box = "debian/contrib-jessie64"
+        web.vm.box = "debian/jessie64"
 
         web.vm.network "private_network", ip: "#{PRIVATE_NETWORK}.5"
 

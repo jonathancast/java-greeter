@@ -1,0 +1,15 @@
+#! /bin/bash
+
+if ! [ -d $HOME/sys/node-v8.10.0-linux-x64 ]; then
+    mkdir -p $HOME/sys || exit $?
+    pushd $HOME/sys || exit $?
+    wget -q -O node-v8.10.0-linux-x64.tar.xz https://nodejs.org/dist/v8.10.0/node-v8.10.0-linux-x64.tar.xz || exit $?
+    tar -xJf node-v8.10.0-linux-x64.tar.xz || exit $?
+    echo 'PATH=$PATH:$HOME/sys/node-v8.10.0-linux-x64/bin' >> $HOME/.profile
+    PATH=$PATH:$HOME/sys/node-v8.10.0-linux-x64/bin
+    popd
+fi
+
+if ! npm list -g @angular/cli > /dev/null 2>&1; then
+    npm install -g @angular/cli || exit $?
+fi
