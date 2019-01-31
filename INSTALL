@@ -1,11 +1,21 @@
-#! /bin/bash
+#! /bin/bash -x
+
+if ! [ -d $HOME/sys/apache-maven-3.6.0 ]; then
+    mkdir -p $HOME/sys || exit $?
+    pushd $HOME/sys || exit $?
+    wget -q -O apache-maven-3.6.0-bin.tar.gz http://apache.claz.org/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz || exit $?
+    tar -xzf apache-maven-3.6.0-bin.tar.gz
+    sed -i '1i PATH=$HOME/sys/apache-maven-3.6.0/bin:$PATH' $HOME/.bashrc
+    PATH=$HOME/sys/apache-maven-3.6.0/bin:$PATH
+    popd
+fi
 
 if ! [ -d $HOME/sys/node-v8.10.0-linux-x64 ]; then
     mkdir -p $HOME/sys || exit $?
     pushd $HOME/sys || exit $?
     wget -q -O node-v8.10.0-linux-x64.tar.xz https://nodejs.org/dist/v8.10.0/node-v8.10.0-linux-x64.tar.xz || exit $?
     tar -xJf node-v8.10.0-linux-x64.tar.xz || exit $?
-    echo 'PATH=$PATH:$HOME/sys/node-v8.10.0-linux-x64/bin' >> $HOME/.profile
+    sed -i '1i PATH=$PATH:$HOME/sys/node-v8.10.0-linux-x64/bin' $HOME/.bashrc
     PATH=$PATH:$HOME/sys/node-v8.10.0-linux-x64/bin
     popd
 fi
