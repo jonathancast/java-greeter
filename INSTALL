@@ -1,12 +1,16 @@
 #! /bin/bash -x
 
 if ! [ -d $HOME/sys/apache-maven-3.6.0 ]; then
+
+MAVEN_VERSION=3.5.4
+
+if ! [ -d $HOME/sys/apache-maven-$MAVEN_VERSION ]; then
     mkdir -p $HOME/sys || exit $?
     pushd $HOME/sys || exit $?
-    wget -q -O apache-maven-3.6.0-bin.tar.gz http://apache.claz.org/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz || exit $?
-    tar -xzf apache-maven-3.6.0-bin.tar.gz
-    sed -i '1i PATH=$HOME/sys/apache-maven-3.6.0/bin:$PATH' $HOME/.bashrc
-    PATH=$HOME/sys/apache-maven-3.6.0/bin:$PATH
+    wget -q -O apache-maven-$MAVEN_VERSION-bin.tar.gz http://apache.claz.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz || exit $?
+    tar -xzf apache-maven-$MAVEN_VERSION-bin.tar.gz
+    sed -i '1i PATH=$HOME/sys/apache-maven-'$MAVEN_VERSION'/bin:$PATH' $HOME/.bashrc
+    PATH=$HOME/sys/apache-maven-$MAVEN_VERSION/bin:$PATH
     popd
 fi
 
