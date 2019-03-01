@@ -1,6 +1,6 @@
 #! /bin/bash -x
 
-if ! [ -d $HOME/sys/apache-maven-3.6.0 ]; then
+sudo yum install -y java-1.8.0-openjdk-devel || exit $?
 
 MAVEN_VERSION=3.5.4
 

@@ -2,7 +2,7 @@
 
 my ($ip) = @ARGV;
 
-system qw/ apt-get install -y postgresql / and die "Can't install postgres";
+system qw/ yum install -y postgresql-server postgresql-contrib / and die "Can't install postgres";
 
 my @ls = do { open my $fh, '<', q{/etc/postgresql/9.4/main/postgresql.conf}; <$fh> };
 @ls = map {
@@ -20,6 +20,8 @@ my @ls = do { open my $fh, '<', q{/etc/postgresql/9.4/main/postgresql.conf}; <$f
     open my $fh, '>>', q{/etc/postgresql/9.4/main/pg_hba.conf};
     print $fh qq{host    all             all             ${ip}/24            md5\n};
 }
+
+system qw/ postgresql-setup initdb / and die "Can't initialize postgres";
 
 system qw/ service postgresql restart / and die "Can't restart postgres";
 

@@ -12,7 +12,7 @@ PRIVATE_NETWORK = "10.45.45"
 
 Vagrant.configure("2") do |config|
     config.vm.define "db" do |db|
-        db.vm.box = "debian/jessie64"
+        db.vm.box = "centos/7"
 
         db.vm.network "private_network", ip: "#{PRIVATE_NETWORK}.4"
         db.vm.synced_folder ".", "/vagrant", type: ""
@@ -21,14 +21,14 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "web" do |web|
-        web.vm.box = "debian/jessie64"
+        web.vm.box = "centos/7"
 
         web.vm.network "private_network", ip: "#{PRIVATE_NETWORK}.5"
         web.vm.synced_folder ".", "/vagrant", type: ""
 
-        web.vm.network "forwarded_port", guest: 5000, host: 18080
+        web.vm.network "forwarded_port", guest: 8080, host: 18080
 
-        web.vm.provision :shell, inline: "apt-get install -y curl libc6-dev postgresql-client libpq-dev"
+        web.vm.provision :shell, inline: "yum install -y curl postgresql wget"
         web.vm.provision :shell, privileged: false, inline: "echo 'export PGHOST=#{PRIVATE_NETWORK}.4' >> $HOME/.profile"
         web.vm.provision :shell, privileged: false, inline: "echo '*:*:*:vagrant:vagrdbpass' >> $HOME/.pgpass"
         web.vm.provision :shell, privileged: false, inline: "chmod 0600 $HOME/.pgpass"
